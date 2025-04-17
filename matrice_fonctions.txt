@@ -1,0 +1,175 @@
+public void add( matrice m, matrice n){
+		
+		int[] tab = new int[m.vec.length];
+		int c = 0;
+		som = new vecteur[tab.length]; 
+		for (int i = 0; i < tab.length; i++) {
+			
+			//this.som[i] = new vecteur();
+			
+			for (int j = 0; j < tab.length; j++) {
+				
+				tab[c] = m.vec[i].getTab(j) + n.vec[i].getTab(j);
+				c++;
+			}
+			//this.som[i] = new vecteur( "vec" + String.valueOf(i), tab);
+			this.som[i] = new vecteur( "vec" , tab);
+			
+			c=0;
+			
+		}
+		
+		
+		matrice somme = new matrice( this.som, "somme");
+		
+		somme.afficher();
+		
+		
+	}
+
+
+
+public class matxvec {
+
+	public matxvec(){
+		System.out.println();
+	}
+
+	public void produit( matrice m, vecteur v){
+		
+		vecteur pro = new vecteur("prod_mat_vec", v.tab);
+		
+		for (int i = 0; i < v.tab.length; i++) {
+			pro.setTab(i, 0);
+		}
+		
+		for (int i = 0; i < v.tab.length; i++) {
+			
+			for (int j = 0; j < v.tab.length; j++) {
+				
+				pro.setTab(i, pro.getTab(i) + m.vec[i].getTab(j)*v.getTab(j));
+				
+			}
+			
+		}
+			pro.affich();
+	}
+}
+
+
+
+public class matXmat {
+
+	vecteur[] pro; 
+	
+	
+		
+	public matXmat(){
+		System.out.println();
+	}
+
+	
+	public void prod( matrice m, matrice n){
+		
+		int num = m.vec.length; 
+		this.pro = new vecteur[num];
+		
+		int[][] tab = new int[num][num];
+		int c = 0;
+		for (int i = 0; i < num; i++) {
+			
+			
+			
+			for (int j = 0; j < num ; j++) {
+				
+				
+				tab[i][j] = 0; 
+				
+				
+				for (int k = 0; k < num; k++) {
+					
+					
+					tab[i][j] += m.vec[i].getTab(k) * n.vec[k].getTab(j);
+					
+					
+					
+				}
+				
+				
+			}
+			
+			
+			//this.pro[i] = new vecteur( "vec" , tab);
+			
+			//c=0;
+			
+		}
+		
+	/*	int[] t = new int[tab.length];
+		
+		for (int i = 0; i < tab.length; i++) {
+			
+			for (int j = 0; j < tab.length; j++) {
+				t[j] = tab[i][j];
+			}
+			this.pro[i] = new vecteur( "vec" , t);
+			
+		}
+		
+			matrice resultat = new matrice( this.pro, "produit");
+			
+		resultat.afficher();*/
+	for (int i = 0; i < tab.length; i++) {
+			
+			for (int j = 0; j < tab.length; j++) {
+			System.out.print( tab[i][j] + " ");
+			}
+			System.out.println();
+			
+		}
+
+	}
+}
+
+
+
+
+
+public class addition {
+	
+	
+	vecteur[] som; 
+	public addition(){
+		System.out.println();
+	}
+	
+	public void add( matrice m, matrice n){
+		
+		int[] tab = new int[m.vec.length];
+		int c = 0;
+		som = new vecteur[tab.length]; 
+		for (int i = 0; i < tab.length; i++) {
+			
+			//this.som[i] = new vecteur();
+			
+			for (int j = 0; j < tab.length; j++) {
+				
+				tab[c] = m.vec[i].getTab(j) + n.vec[i].getTab(j);
+				c++;
+			}
+			//this.som[i] = new vecteur( "vec" + String.valueOf(i), tab);
+			this.som[i] = new vecteur( "vec" , tab);
+			
+			c=0;
+			
+		}
+		
+		
+		matrice somme = new matrice( this.som, "somme");
+		
+		somme.afficher();
+		
+		
+	}
+	
+}

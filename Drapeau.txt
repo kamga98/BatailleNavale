@@ -1,0 +1,65 @@
+
+
+Drapeau 
+
+public class Drapeau {
+
+	private String pays;
+	private String sens;
+	private Couleur[] couleurs;
+
+	public Drapeau(String pays, String sens, Couleur[] couleurs) {
+
+		this.pays = pays;
+		this.sens = sens;
+
+		this.couleurs = new Couleur[couleurs.length];
+
+		for (int i = 0; i < couleurs.length; i++) {
+
+			this.couleurs[i] = new Couleur(couleurs[i]);
+			/*
+			 * this.couleurs[i].setNom(couleurs[i].getNom());
+			 * this.couleurs[i].setR(couleurs[i].getR());
+			 * this.couleurs[i].setV(couleurs[i].getV());
+			 * this.couleurs[i].setB(couleurs[i].getB()); //this.couleurs[i] =
+			 * couleurs[i];
+			 */
+
+		}
+	}
+
+	public void affichage() {
+
+		if (this.sens == "horizontal") {
+			for (int i = 0; i < this.couleurs.length; i++) {
+				System.out.print(this.couleurs[i].getNom() + "");
+
+			}
+		} else {
+			for (int i = 0; i < this.couleurs.length; i++) {
+				System.out.println(this.couleurs[i].getNom());
+
+			}
+		}
+
+	}
+
+	public void drapeau_français() {
+
+		if (this.sens != "vertical") {
+			System.out.println(" Il ne s'agit pas du drapeau français");
+		} else {
+			if (this.couleurs.length != 3) {
+				System.out.println(" Il ne s'agit pas du drapeau français");
+			} else {
+				if ((this.couleurs[0].getNom() == "Bleu")
+						&& (this.couleurs[1].getNom() == "Blan")
+						&& (this.couleurs[2].getNom() == "Rouge")) {
+					System.out.println(" Il s'agit du drapeau français");
+				}
+			}
+		}
+	}
+
+}

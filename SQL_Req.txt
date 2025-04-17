@@ -1,0 +1,164 @@
+
+1-
+select nom 
+from ADHERENT 
+order by nom;
+
+2-
+select nom
+from ADHERENT 
+where commune like "%Saint Joseph%"
+order by nom;
+
+3-
+select nom
+from ADHERENT 
+where commune like "Saint%"
+order by nom;
+
+4-
+select count(num) as Nbre_Adh
+from ADHERENT;
+
+5-
+select nom, num
+from ADHERENT                                 
+where num in ( select f.numAdh 
+	       from FONCTION f );
+6-
+select commune , count(nom) as nbre_adh
+from ADHERENT
+group by commune;
+
+7-
+select numRando , destination
+from RANDO 
+ORDER BY dateRando ASC;
+
+8-
+select AVG(nbreKm) as moyenne 
+from RANDO 
+where year(dateRando) = 2018;
+
+9-
+select sum(nbreKm) as Nbrekm , count(numRando) as NbreRando
+from RANDO
+where year(dateRando) = 2018;
+
+10-
+select destination 
+from RANDO 
+where nbreKm BETWEEN 15 AND 20;
+
+11-
+select destination
+from RANDO
+where difficulte like "%facile%" or nbreKm < 20 ;
+
+12-
+select count(destination)
+from RANDO
+where year(dateRando) = 2017;
+
+13-
+select destination , MAX(nbreKm) , MIN(nbreKm)
+from RANDO
+where year(dateRando) = 2017;
+
+select destination
+from RANDO
+where month(dateRando) = 02;
+
+select destination, AVG(nbreKm)
+from RANDO
+group by difficulte;
+
+14-
+select r.destination
+from RANDO r inner join ADHERENT a on r.numAdhResp = a.Num
+where a.prenom = "Gisèle";
+
+select nom 
+from ADHERENT 
+where num in ( select f.numAdh
+	       from FONCTION f);
+
+15-
+update RANDO 
+SET nbreKm = 12
+where destination = "LYON";
+
+16-
+update ADHERENT 
+SET CodePostal = 42800 , commune = Châteauneuf
+where prenom = "Sabine";
+
+17-
+DELETE FROM RANDO 
+where numRando in ( select r.numRando 
+		    from RANDO r
+		    where year(r.date_Rando) = 2018 
+		    order by r.date_Rando ASC
+	            Limit 1);
+18-
+uptade FONCTION 
+SET nomFonction = "Chargé de communication"
+where numFonction = 4; 
+
+INSERT INTO FONCTION ( numFonction , nomFonction )
+VALUES ( 5, "vice-president");
+
+ALTER TABLE FONCTION 
+ADD COLUMN datePriseFonction  ;
+
+--------------------------------------------------------
+1-
+select Nom_Livr
+from LIVREUR 
+where Nom_Livr like "T%" and Salaire BETWEEN 500 and 1000;
+
+2-
+select Nom_Prod , Taille_Prod, Prix_Vente_Prod, Code_Classe_Prod
+from produit 
+where Prix_Vente_Prod > 7 and Code_Classe_Prod = 1
+order by Prix_Vente_Prod DESC;
+
+3-
+select Nom_Classe_Prod , Num_Prod, Nom_Prod, Taille_Prod, Prix_Vente_Prod
+from produit 
+group by Code_Classe_Prod
+order by Taille_Prod ASC;  // on peut mettre deux arguments dans le order by séparés par une virgule 
+
+4-
+select l.Nom_Livr , l.Prenom_Livr, v.Nom_Type_Veh, DateDiff( 'yyyy', CURRENT_DATE, v.Date_Achat_Veh) as Age
+from LIVREUR l inner join VEHICULE v 
+on l.Num_Vehi = v.Num_Veh 
+inner join TYPE_VEHICULE t on v.Code_Type_Veh = t.Code_Type_Veh 
+order by l.Nom_Livr ;
+
+5-
+select p.Nom_Prod , n.Qte_Ingr , n.Unite, i.Num_Ingr 
+from PRODUIT p inner join NECESSITE n on p.Num_Prod  = n.Num_Prod           
+inner join INGREDIENT i on n.Num_Prod = i.Num_Ingr 
+where p.Nom_Prod = "%Calzone%" and Taille_Prod = 1;
+
+6-
+select p.Nom_Prod , n.Qte_Ingr , n.Unite, i.Num_Ingr 
+from PRODUIT p inner join NECESSITE n on p.Num_Prod  = n.Num_Prod
+inner join INGREDIENT i on n.Num_Prod = i.Num_Ingr 
+where i.Nom_Ingr = "%gruyère%" and n.Qte_Ingr >= 15 ;
+order by p.Nom_Prod;
+
+7-
+select Nom_Prod, Taille_Prod , Prix_Vente_Prod 
+from PRODUIT p inner join NECESSITE n on p.Num_Prod  = n.Num_Prod
+inner join INGREDIENT i on n.Num_Prod = i.Num_Ingr 
+where i.Num_Ingr , 
+
+
+8-
+select Nom_Prod 
+from PRODUIT
+where Nom_Prod in ( select p.Nom_Prod
+		    from PRODUIT p inner join REMPLACER r on p.PRODUIT = r.Num_Prod ) 
+		    from

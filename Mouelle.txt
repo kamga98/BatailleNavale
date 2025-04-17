@@ -1,0 +1,49 @@
+  
+JONGLAGE DU MOUELLE
+
+/*void game(){
+    int a, b, i,j;
+    int tab[n][n];
+    FILE* dess;
+    dess= fopen("grille.txt", "r+");
+    while(!feof(dess)){
+        fread(&tab, sizeof(tab), 1, dess);
+    }
+
+    do{
+        printf("\n Entrer les coordonnees du bateau en question\n");
+        scanf("%d %d", &a, &b);
+    }while(a<0 || a>5 || b<0 || b>5 );
+
+    if((a==0 && b==0) || (a==1 && b==0) || (a==2 && b==0) || (a==3 && b==0) || (a==4 && b==0) || (a==5 && b==0) || (a==0 && b==0) || (a==0 && b==1) || (a==0 && b==2) || (a==0 && b==3) || (a==0 && b==4) || (a==0 && b==5))
+    {
+        printf("\n Impossible de mettre un bateau sur cet emplacement\n");
+    }
+
+   if((a!=0 && b==0) || (a!=0 && b!=0) || (a==0 && b!=0) ){
+
+    tab[a][b]='o';
+
+   }
+   for(i=0; i<n; i++){
+
+    for(j=0; j<n;j++){
+
+        fwrite(&tab, sizeof(tab), 1, dess);
+    }
+
+   }
+
+     for(i=0; i<n; i++){
+        j=0;
+    for(j=0; j<n; j++){
+            printf("%c  \t", tab[i][j]);
+    }
+    printf("\n");
+
+  }
+
+   fclose(dess);
+
+
+}*/

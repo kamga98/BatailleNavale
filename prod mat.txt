@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+main()
+{
+    float T[3][3],t[3][3],c[3][3];
+    int i,j,k;
+    printf("\nNous allons calculer ensemble le produit de 2 matrices\n\t");
+    printf("Vous allez entrer la premiere matrice\n");
+    for(i=0;i<=2;i++){
+        for(j=0;j<=2;j++){
+            printf("\nEntrez un nombre\n");
+            scanf("%f" ,&T[i][j]);
+        }
+    }
+    printf("La 1ere matrice est en lieu sur entrez la 2e\n");
+    for(i=0;i<=2;i++){
+        for(j=0;j<=2;j++){
+            printf("Entrez un nombre\n");
+            scanf("%f",&t[i][j]);
+        }
+    }
+    printf("La 2e vient d'etre sauvegardee\n\tCalculons alors le produit de la 1ere par la 2e\n");
+    system("pause");
+    for(i=0;i<=2;i++){
+        for(j=0;j<=2;j++){
+            c[i][j]=0;
+            for(k=0;k<=2;k++){
+               c[i][j]=c[i][j]+T[i][k]*t[k][j];
+            }
+        }
+    }
+    printf("\nLa nouvelle matrice est donnee par\n\t");
+    for(k=0;k<=2;k++){
+            printf("\n");
+        for(j=0;j<=2;j++){
+        printf("%f\t",c[k][j]);
+        }
+    }
+    main();
+}

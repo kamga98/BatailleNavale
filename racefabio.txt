@@ -1,0 +1,183 @@
+package race;
+import java.util.*;
+
+public class play {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		
+		
+		circuit circuit1 = new circuit();
+		circuit circuit2 = new circuit();
+		circuit circuit3 = new circuit();
+		circuit circuit4 = new circuit();
+		circuit circuit5 = new circuit();
+		circuit circuitact = new circuit();
+		
+		// initialisation des circuits 
+		circuit1.Circuit("Pablo", "Medellin", 1000);
+		circuit2.Circuit("Pele", "Brazilia", 3000);
+		circuit3.Circuit("Cali", "Bogota", 3500);
+		circuit4.Circuit("Hoso", "Bameka", 4500);
+		circuit5.Circuit("Cosmos", "Aldebaran", 8000);
+		//circuitact.circuit("", "", 0);
+	circuitact.xPts = new int[] {50, 220, 340, 320, 230, 210, 150, 20};
+	circuitact.yPts = new int[] {90, 30, 140, 360,380, 250, 200, 190};	
+		
+	
+		
+		
+		
+		
+		// initialisation des voitures 
+		
+		ArrayList<voiture> cars = new ArrayList<voiture>();
+		
+		cars.add(new voiture("vettel", 1, 300 , 0.02, 250 ,0 )); 
+		cars.add(new voiture("hamilton", 2, 200, 0.03, 500, 0));
+		cars.add(new voiture("alonzo", 3, 200, 0.04, 4, 0 ));
+		cars.add(new voiture("martinez",4 , 500, 0.05 ,4, 0));
+		
+		Scanner sc = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
+		course run = new course(0, 0); 
+		
+		System.out.println("\n \t\t           NEED FOR SPEED");
+		
+		
+		do{
+		System.out.println("Entrez le nombre de tour ");
+		run.nbretour = sc.nextInt();
+		}while( run.nbretour < 0);
+		
+		do{
+		
+		System.out.println("Entrez le nombre de voitures ( compris entre 2 et 4 ) ");
+		run.nbrevoiture = scan.nextInt();
+		
+		}while( run.nbrevoiture > 4 || run.nbrevoiture < 2 );
+		
+		Fenetre fen = new Fenetre();
+		fen.nbConcurrents = run.nbrevoiture;
+		fen.xPts = circuitact.xPts;
+		fen.yPts = circuitact.yPts; 
+		fen.initialise();
+		
+		int choix = 0; 
+		Scanner scann = new Scanner(System.in);
+		voiture bolide[] = new voiture[run.nbrevoiture];
+		
+		// clonage des voitures
+		
+		for (int i = 0; i < run.nbrevoiture; i++) {
+			bolide[i]  = cars.get(i); // ça bug là 
+			
+			//System.out.println(run.nbrevoiture+" "+bolide[i].nom);
+			
+			//bolide[i].temps = cars.get(i).temps;
+			//bolide[i].nom = cars.get(i).nom;
+
+			//System.out.println(run.nbrevoiture);
+		}
+		
+		
+		/*for (int i = 0; i < run.nbrevoiture ; i++) {
+			fen.pCent[i] = bolide[i].position / circuitact.longueur;
+		}*/
+		 fen.texte = "                    * NEED FOR SPEED *     ";
+		
+		System.out.println("Choisir le nombre correspondant au circuit");;
+		System.out.println("   NOM       VILLE      LONGUEUR");
+		System.out.println("1. Pablo     Medellin      35");
+		System.out.println("2. Pele      Brazilia      40");
+		System.out.println("3. Cali      Bogota        30"); 
+		System.out.println("4. Hoso      Bameka        45");
+		System.out.println("5. Cosmos    Aldebaran     50");
+		
+		// choix du circuit;
+		
+		choix = scann.nextInt();
+		
+		switch(choix){
+		case 1:
+			circuitact.Circuit("Pablo", "Medellin", 35);
+		break;
+		case 2:
+			circuitact.Circuit("Pele", "Brazilia", 40);
+		break;
+		case 3:
+			circuitact.Circuit("Cali", "Bogota", 30);
+		break;
+		case 4:
+			circuitact.Circuit("Hoso", "Bameka", 45);
+		break;
+		case 5:
+			circuitact.Circuit("Cosmos", "Aldebaran", 50);
+		break;
+		}
+		//System.out.println(run.nbrevoiture);
+
+		// Démarrage des bolides;
+
+		for(int i=0;i< run.nbrevoiture ;i++){
+			
+			bolide[i].demarrer();
+		    System.out.println(i);
+		} 
+		 int i=0; 
+		 
+		 while( run.end(run.nbrevoiture, bolide , circuitact.longueur, run.nbretour) != run.nbrevoiture){
+			 bolide[i].avancer(circuitact.longueur, run.nbretour);
+			// bolide[i].arreter();
+			 i++;
+			 if( i == run.nbrevoiture){
+				 i=0; 
+			 }
+
+				
+				
+				for (int j = 0; j < run.nbrevoiture ; j++) {
+					if( bolide[j].nivcarb != 0){
+					fen.pCent[j] = (bolide[j].position / circuitact.longueur)*100;
+					}
+					else{
+						fen.pCent[j] = 0;
+						bolide[j].nivcarb = bolide[j].tailleres; 
+					}
+					
+				}
+				fen.dessine();
+				fen.pause();
+			 
+		 }
+		
+		 
+		// cars.get(i).demarrer();
+		 //cars.get(i).avancer(circuitact.longueur, run.nbretour);
+				
+		System.out.println(run.nbrevoiture);
+
+		run.classement(run.nbrevoiture, bolide);
+		sc.close();
+		scan.close();
+		scann.close();
+		
+		System.out.println("\n \t\t\n   Merci d'avoir joué");
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+
+	}
+
+}
